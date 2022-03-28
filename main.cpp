@@ -25,7 +25,7 @@ class Density_matrix{
 
             //save data
             ofstream outdata;
-            outdata.open("step_0.dat"); // opens the file
+            outdata.open("/home/centroescolarjuanabarrera/tesis/v_o_s/output/step_0.dat"); // opens the file
                 if( !outdata ) { // file couldn't be opened
                     cerr << "Error: file could not be opened" << endl;
                       exit(1);
@@ -270,10 +270,11 @@ class Density_matrix{
 
             //sum one to the count step variable
             num_steps=num_steps+1;
+
             //save data
             ofstream outdata;
 
-            outdata.open("step_"+to_string(num_steps)+".dat"); // opens the file
+            outdata.open("/home/centroescolarjuanabarrera/tesis/v_o_s/output/step_"+to_string(num_steps)+".dat"); // opens the file
                 if( !outdata ) { // file couldn't be opened
                     cerr << "Error: file could not be opened" << endl;
                       exit(1);
