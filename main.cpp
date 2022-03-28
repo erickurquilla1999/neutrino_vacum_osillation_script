@@ -1,7 +1,13 @@
 #include <iostream>
+using std::cerr;
+using std::endl;
 #include <complex>
 #include <cmath>
-
+#include <fstream>
+using std::ofstream;
+#include <cstdlib>
+#include <string>
+#include <string.h>
 using namespace std;
 
 
@@ -11,10 +17,29 @@ class Density_matrix{
 
         //definition of density matrix complex array
         std::complex<double> density_matrix[3][3];
+        int num_steps=0;
 
         //initial conditions
         Density_matrix(){
             density_matrix[0][0]={1,0};
+
+            //save data
+            ofstream outdata;
+            outdata.open("step_0.dat"); // opens the file
+                if( !outdata ) { // file couldn't be opened
+                    cerr << "Error: file could not be opened" << endl;
+                      exit(1);
+                }
+            string outvalue;
+            for (int i=0;i<3;i++){
+                for (int j=0;j<3;j++){
+                    double re=real(density_matrix[i][j]);
+                    double im=imag(density_matrix[i][j]);
+                    outvalue=to_string(re)+" "+to_string(im)+" 0.0";
+                    outdata << outvalue << endl;
+                };  
+            };  
+            outdata.close();
         };
 
         void print_matrix(std::complex<double> matrix[3][3]){
@@ -69,11 +94,12 @@ class Density_matrix{
             { {s12*s23-c12*s13*c23*cdcp,-c12*s13*c23*sdcp} , {-c12*s23-s12*s13*c23*cdcp,-s12*s13*c23*sdcp} , {c13*c23,0} }
             };
 
+/*
             //print mixing matrix
             std::cout<<""<<std::endl;
             std::cout<<"Mixing matrix U"<<std::endl;
             print_matrix(mixing_matrix);
-
+*/
             //obtain mixin matrix daguer
             std::complex<double> mixing_matrix_daguer[3][3];
             for (int i=0;i<3;i++){
@@ -81,13 +107,12 @@ class Density_matrix{
                     mixing_matrix_daguer[j][i]=std::conj(mixing_matrix[i][j]);
                 };
             };
-
-
+/*
             //print mixing matrix daguer
             std::cout<<""<<std::endl;
             std::cout<<"Mixing matrix U daguer"<<std::endl;
             print_matrix(mixing_matrix_daguer);
-
+*/
 
 
             //prove of U*U_daguer
@@ -100,24 +125,24 @@ class Density_matrix{
                     };
                 };
             };
-
+/*
             //print I
             std::cout<<""<<std::endl;
             std::cout<<"I matrix"<<std::endl;
             print_matrix(I);
-
+*/
 
             //mass matrix
             std::complex<double> mass_matrix[3][3];
             mass_matrix[0][0]={m1*m1*c*c*c*c/(2*E),0};
             mass_matrix[1][1]={m2*m2*c*c*c*c/(2*E),0};
             mass_matrix[2][2]={m3*m3*c*c*c*c/(2*E),0};
-
+/*
             //print mass matrix
             std::cout<<""<<std::endl;
             std::cout<<"mass matrix"<<std::endl;
             print_matrix(mass_matrix);
-
+*/
 
             // obtain hamiltonian
             std::complex<double> hamiltonian[3][3];
@@ -131,19 +156,20 @@ class Density_matrix{
                     };
                 };
             };
-
+/*
             //print vacuum hamiltonian
             std::cout<<""<<std::endl;
             std::cout <<"vacuum hamiltonian"<<std::endl;
             print_matrix(hamiltonian);
 
 
-
             //print initial density matrix
-            std::cout<<""<<std::endl;
+            std::cout<<"···························"<<std::endl;
+            std::cout<<"···························"<<std::endl;
+            std::cout<<"···························"<<std::endl;
             std::cout <<"initial density matrix"<<std::endl;
             print_matrix(density_matrix);
-
+*/
             
             //######################################
             //doing a step with RK4
@@ -166,12 +192,12 @@ class Density_matrix{
                     k1[i][j]=minus_i_over_hbar*k1[i][j];
                 };
             };        
-
+/*
             //print k1
             std::cout<<""<<std::endl;
             std::cout <<"k1 matrix"<<std::endl;
             print_matrix(k1);
-
+*/
 
             //found k2
             for (int i=0;i<3;i++){
@@ -183,12 +209,12 @@ class Density_matrix{
                     k2[i][j]=minus_i_over_hbar*k2[i][j];
                 };     
             };
-
+/*
             //print k2
             std::cout<<""<<std::endl;
             std::cout <<"k2 matrix"<<std::endl;
             print_matrix(k2);
-
+*/
   
 
             //found k3
@@ -201,12 +227,12 @@ class Density_matrix{
                     k3[i][j]=minus_i_over_hbar*k3[i][j];
                 };
             };  
-
+/*
             //print k3
             std::cout<<""<<std::endl;
             std::cout <<"k3 matrix"<<std::endl;
             print_matrix(k3);
-
+*/
 
 
             //found k4
@@ -220,12 +246,12 @@ class Density_matrix{
                 };
             };  
             
-             
+/*             
             //print k4
             std::cout<<""<<std::endl;
             std::cout <<"k4 matrix"<<std::endl;
             print_matrix(k4);
-            
+*/            
   
 
             //found next step density matrix 
@@ -235,10 +261,35 @@ class Density_matrix{
                 };
             };  
 
+/*
             //print next step density matrix
             std::cout<<""<<std::endl;
             std::cout <<"final density matrix"<<std::endl;
             print_matrix(density_matrix);
+*/
+
+            //sum one to the count step variable
+            num_steps=num_steps+1;
+            //save data
+            ofstream outdata;
+
+            outdata.open("step_"+to_string(num_steps)+".dat"); // opens the file
+                if( !outdata ) { // file couldn't be opened
+                    cerr << "Error: file could not be opened" << endl;
+                      exit(1);
+                }
+
+            string outvalue;
+            for (int i=0;i<3;i++){
+                for (int j=0;j<3;j++){
+                    double re=real(density_matrix[i][j]);
+                    double im=imag(density_matrix[i][j]);
+                    double time=num_steps*dt;
+                    outvalue=to_string(re)+" "+to_string(im)+" "+to_string(time);
+                    outdata << outvalue << endl;
+                };  
+            };  
+            outdata.close();
 
             return 0,0;
 
@@ -250,9 +301,11 @@ class Density_matrix{
 int main(){
 
     Density_matrix density;
-    
-    for (int i=0;i<1;i++){
-        density.evolve_density_matrix(1e-5);
+    std::cout<<real(density.density_matrix[0][0])<<std::endl;    
+    for (int i=0;i<100;i++){
+        density.evolve_density_matrix(1e-6);
+        std::cout<<real(density.density_matrix[0][0])<<std::endl;
+
     };
 
     return 0;
