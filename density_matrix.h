@@ -6,10 +6,17 @@ using std::endl;
 #include <cmath>
 #include <fstream>
 using std::ofstream;
-#include <cstdlib>
+#include <cstdlib> 
 #include <string.h>
 
-// coments
+//a
+//a
+//a
+//a
+//a
+//a
+//a
+//a
 
 class Density_matrix{
     public:
