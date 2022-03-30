@@ -9,6 +9,7 @@ using std::ofstream;
 #include <cstdlib> 
 #include <string.h>
 
+<<<<<<< HEAD
 //b
 //b
 //b
@@ -16,6 +17,16 @@ using std::ofstream;
 //b
 //b
 //b
+=======
+//a
+//a
+//a
+//a
+//a
+//a
+//a
+//a
+>>>>>>> improve_01
 
 class Density_matrix{
     public:
