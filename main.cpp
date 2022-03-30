@@ -37,5 +37,8 @@ int main(){
 
     return 0;
 
-    //result can be found in de output directory
+    //print final message
+    std::cout<<"code finish: result can be found in de output directory"<<std::endl;
+
+
 };
