@@ -1,9 +1,15 @@
 #include <iostream>
 #include <complex>
 #include "density_matrix.h"
+<<<<<<< HEAD
 //master
 //master
 //master
+=======
+//improve_01
+//improve_01
+//improve_01
+>>>>>>> improve_01
 int main(){
 
     //mixing angles radians
