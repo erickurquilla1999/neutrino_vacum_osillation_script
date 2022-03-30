@@ -9,14 +9,11 @@ using std::ofstream;
 #include <cstdlib> 
 #include <string.h>
 
-//a
-//a
-//a
-//a
-//a
-//a
-//a
-//a
+//improve_01_change
+//improve_01_change
+//improve_01_change
+//improve_01_change
+//improve_01_change
 
 class Density_matrix{
     public:
