@@ -6,7 +6,7 @@ using std::endl;
 #include <cmath>
 #include <fstream>
 using std::ofstream;
-#include <cstdlib>
+#include <cstdlib> 
 #include <string.h>
 
 class Density_matrix{
