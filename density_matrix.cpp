@@ -40,20 +40,6 @@ Density_matrix::Density_matrix()
 
 
 
-void Density_matrix::print_matrix(std::complex<double> matrix[3][3])
-{
-    for (int i=0;i<3;i++)
-    {
-        for (int j=0;j<3;j++)
-        {
-            std::cout<<matrix[i][j]<<" ";
-        };
-        std::cout<<""<<std::endl;
-    };
-};
-
-
-
 double Density_matrix::evolve_density_matrix(double dt,double theta_12,double theta_13,double theta_23,double m1,double m2,double m3,double delta_cp,double E){
     //light velocity
     //double c=1.0;
