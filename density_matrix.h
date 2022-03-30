@@ -9,6 +9,8 @@ using std::ofstream;
 #include <cstdlib> 
 #include <string.h>
 
+// coments
+
 class Density_matrix{
     public:
 
