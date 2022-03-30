@@ -1,48 +1,39 @@
 #include <iostream>
-using std::cerr;
-using std::endl;
 #include <complex>
 #include <cmath>
 #include <fstream>
-using std::ofstream;
-#include <cstdlib>
-#include <string.h>
-using namespace std;
 #include "density_matrix.h"
 
-
-
+//initial condition fuction 
 Density_matrix::Density_matrix()
 {
+    //initial conditions
     num_steps=0;
     density_matrix[0][0]={1,0};
 
-    //save initial conditions density matrix
-    ofstream outdata;
+    //save initial conditions density matrix in output directory
+    std::ofstream outdata;
     outdata.open("/home/centroescolarjuanabarrera/tesis/v_o_s/output/step_0.dat"); // opens the file
         if( !outdata ) 
         {
-            cerr << "Error: file could not be opened" << endl;
+            std::cerr << "Error: file could not be opened" << std::endl;
             exit(1);
         }
-    string outvalue;
+    std::string outvalue;
     for (int i=0;i<3;i++)
     {
         for (int j=0;j<3;j++)
         {
             double re=real(density_matrix[i][j]);
             double im=imag(density_matrix[i][j]);
-            outvalue=to_string(re)+" "+to_string(im)+" 0.0";
-            outdata << outvalue << endl;
+            outvalue=std::to_string(re)+" "+std::to_string(im)+" 0.0";
+            outdata << outvalue << std::endl;
         };  
     };  
     outdata.close(); 
 };
 
-
-
-
-
+//evolve density matrix function
 double Density_matrix::evolve_density_matrix(double dt,double theta_12,double theta_13,double theta_23,double m1,double m2,double m3,double delta_cp,double E)
 {
 
@@ -98,16 +89,14 @@ double Density_matrix::evolve_density_matrix(double dt,double theta_12,double th
         };
     };
 
-    //######################################
     //doing a step with RK4
-    //######################################
-
+    
     std::complex<double> k1[3][3];
     std::complex<double> k2[3][3];
     std::complex<double> k3[3][3];
     std::complex<double> k4[3][3];
 
-    complex<double> minus_i_over_hbar={0,-1/hbar};
+    std::complex<double> minus_i_over_hbar={0,-1/hbar};
             
     //found k1
     for (int i=0;i<3;i++){
@@ -163,26 +152,25 @@ double Density_matrix::evolve_density_matrix(double dt,double theta_12,double th
     //sum one to the count step variable
     num_steps=num_steps+1;
 
-    //save data
-    ofstream outdata;
-    outdata.open("/home/centroescolarjuanabarrera/tesis/v_o_s/output/step_"+to_string(num_steps)+".dat"); // opens the file
+    //save new density matrix in output directory
+    std::ofstream outdata;
+    outdata.open("/home/centroescolarjuanabarrera/tesis/v_o_s/output/step_"+std::to_string(num_steps)+".dat"); // opens the file
         if( !outdata ) { // file couldn't be opened
-            cerr << "Error: file could not be opened" << endl;
+            std::cerr << "Error: file could not be opened" << std::endl;
                 exit(1);
         }
 
-    string outvalue;
+    std::string outvalue;
     for (int i=0;i<3;i++){
         for (int j=0;j<3;j++){
             double re=real(density_matrix[i][j]);
             double im=imag(density_matrix[i][j]);
             double time=num_steps*dt;
-            outvalue=to_string(re)+" "+to_string(im)+" "+to_string(time);
-            outdata << outvalue << endl;
+            outvalue=std::to_string(re)+" "+std::to_string(im)+" "+std::to_string(time);
+            outdata << outvalue << std::endl;
         };  
     };  
     outdata.close();
 
     return 0,0;
-
 };

@@ -1,15 +1,6 @@
 #include <iostream>
-using std::cerr;
-using std::endl;
 #include <complex>
-#include <cmath>
-#include <fstream>
-using std::ofstream;
-#include <cstdlib>
-#include <string.h>
-using namespace std;
 #include "density_matrix.h"
-
 
 int main(){
 
@@ -17,7 +8,7 @@ int main(){
     double theta_12=1e-6*M_PI/180;
     double theta_13=48.3*M_PI/180;
     double theta_23=8.61*M_PI/180;
-            
+    
     //neutrino mases kg
     double m1=0.049*1.782662e-36;
     double m2=0*1.782662e-36;
@@ -29,15 +20,22 @@ int main(){
     //energia J
     double E=10.0e6*1.60218e-19; 
 
-    //size step
+    //time size step
     double dt=1.0e-6;
 
-    Density_matrix density;
-    std::cout<<real(density.density_matrix[0][0])<<std::endl;    
-    for (int i=0;i<100;i++){
-        density.evolve_density_matrix(dt, theta_12, theta_13, theta_23, m1, m2, m3, delta_cp, E);
-        std::cout<<real(density.density_matrix[0][0])<<std::endl;
+    //number of step to be compute
+    int number_of_steps=100;
+    
+    //define an object of Density_matrix class
+    Density_matrix density_object;
+
+    //run numb_of_steps times the evolve_density_matrix() functions
+    for (int i=0;i<number_of_steps;i++)
+    {
+        density_object.evolve_density_matrix(dt, theta_12, theta_13, theta_23, m1, m2, m3, delta_cp, E);
     };
 
     return 0;
+
+    //result can be found in de output directory
 };
