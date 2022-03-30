@@ -10,6 +10,8 @@ using std::ofstream;
 using namespace std;
 #include "density_matrix.h"
 
+
+
 Density_matrix::Density_matrix()
 {
     num_steps=0;
@@ -40,7 +42,10 @@ Density_matrix::Density_matrix()
 
 
 
-double Density_matrix::evolve_density_matrix(double dt,double theta_12,double theta_13,double theta_23,double m1,double m2,double m3,double delta_cp,double E){
+
+double Density_matrix::evolve_density_matrix(double dt,double theta_12,double theta_13,double theta_23,double m1,double m2,double m3,double delta_cp,double E)
+{
+
     //light velocity
     //double c=1.0;
     double c=299792458;
@@ -59,14 +64,14 @@ double Density_matrix::evolve_density_matrix(double dt,double theta_12,double th
     double sdcp=sin(delta_cp);
     double cdcp=cos(delta_cp);
 
-    //obtain mixing matrix
+    //obtain mixing matrix U
     std::complex<double> mixing_matrix[3][3]={
     { {c12*c13,0} , {s12*c13,0} , {s13*cdcp,-s13*sdcp} } ,
     { {-s12*c23-c12*s13*s23*cdcp,-c12*s13*s23*sdcp} , {c12*c23-s12*s13*s23*cdcp,-s12*s13*s23*sdcp} , {c13*s23,0} },
     { {s12*s23-c12*s13*c23*cdcp,-c12*s13*c23*sdcp} , {-c12*s23-s12*s13*c23*cdcp,-s12*s13*c23*sdcp} , {c13*c23,0} }
     };
 
-    //obtain mixin matrix daguer
+    //obtain mixin matrix U daguer
     std::complex<double> mixing_matrix_daguer[3][3];
     for (int i=0;i<3;i++){
         for (int j=0;j<3;j++){
