@@ -1,15 +1,7 @@
 #include <iostream>
 #include <complex>
 #include "density_matrix.h"
-<<<<<<< HEAD
-//master
-//master
-//master
-=======
-//improve_01
-//improve_01
-//improve_01
->>>>>>> improve_01
+
 int main(){
 
     //mixing angles radians
@@ -47,6 +39,5 @@ int main(){
 
     //print final message
     std::cout<<"code finish: result can be found in de output directory"<<std::endl;
-
 
 };
