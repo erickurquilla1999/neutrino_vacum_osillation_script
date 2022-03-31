@@ -13,7 +13,7 @@ Density_matrix::Density_matrix()
 
     //save initial conditions density matrix in output directory
     std::ofstream outdata;
-    outdata.open("/home/centroescolarjuanabarrera/tesis/v_o_s/output/step_0.dat"); // opens the file
+    outdata.open("output/step_0.dat"); // opens the file
         if( !outdata ) 
         {
             std::cerr << "Error: file could not be opened" << std::endl;
@@ -154,7 +154,7 @@ double Density_matrix::evolve_density_matrix(double dt,double theta_12,double th
 
     //save new density matrix in output directory
     std::ofstream outdata;
-    outdata.open("/home/centroescolarjuanabarrera/tesis/v_o_s/output/step_"+std::to_string(num_steps)+".dat"); // opens the file
+    outdata.open("output/step_"+std::to_string(num_steps)+".dat"); // opens the file
         if( !outdata ) { // file couldn't be opened
             std::cerr << "Error: file could not be opened" << std::endl;
                 exit(1);

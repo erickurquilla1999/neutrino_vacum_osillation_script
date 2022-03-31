@@ -35,9 +35,6 @@ int main(){
         density_object.evolve_density_matrix(dt, theta_12, theta_13, theta_23, m1, m2, m3, delta_cp, E);
     };
 
-    //print final message
-    std::cout<<"code finish: result can be found in de output directory"<<std::endl;
-
     return 0;
 
 };
