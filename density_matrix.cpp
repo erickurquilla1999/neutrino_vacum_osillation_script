@@ -13,7 +13,7 @@ Density_matrix::Density_matrix()
 
     //save initial conditions density matrix in output directory
     std::ofstream outdata;
-    outdata.open("/home/centroescolarjuanabarrera/tesis/v_o_s/output/step_0.dat"); // opens the file
+    outdata.open("output/step_0.dat"); // opens the file
         if( !outdata ) 
         {
             std::cerr << "Error: file could not be opened" << std::endl;
@@ -38,12 +38,10 @@ double Density_matrix::evolve_density_matrix(double dt,double theta_12,double th
 {
 
     //light velocity
-    //double c=1.0;
-    double c=299792458;
+    double c=1.0;
 
     //hbar 
-    //double hbar=1/(2*M_PI);
-    double hbar=1.054571817e-34;
+    double hbar=1.0;
 
     // sin and cos for U matix
     double s12=sin(theta_12);
@@ -72,9 +70,9 @@ double Density_matrix::evolve_density_matrix(double dt,double theta_12,double th
 
     //mass matrix
     std::complex<double> mass_matrix[3][3];
-    mass_matrix[0][0]={m1*m1*c*c*c*c/(2*E),0};
-    mass_matrix[1][1]={m2*m2*c*c*c*c/(2*E),0};
-    mass_matrix[2][2]={m3*m3*c*c*c*c/(2*E),0};
+    mass_matrix[0][0]={m1*m1/(2*E),0};
+    mass_matrix[1][1]={m2*m2/(2*E),0};
+    mass_matrix[2][2]={m3*m3/(2*E),0};
 
     // obtain hamiltonian
     std::complex<double> hamiltonian[3][3];
@@ -154,7 +152,7 @@ double Density_matrix::evolve_density_matrix(double dt,double theta_12,double th
 
     //save new density matrix in output directory
     std::ofstream outdata;
-    outdata.open("/home/centroescolarjuanabarrera/tesis/v_o_s/output/step_"+std::to_string(num_steps)+".dat"); // opens the file
+    outdata.open("output/step_"+std::to_string(num_steps)+".dat"); // opens the file
         if( !outdata ) { // file couldn't be opened
             std::cerr << "Error: file could not be opened" << std::endl;
                 exit(1);
