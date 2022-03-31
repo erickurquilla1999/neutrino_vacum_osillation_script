@@ -10,10 +10,12 @@ for i in range(0,10000):
     rho_electron.append(data[0][0])
     time.append(data[2][0])
 
-#theory data
+#constant
+
 theta_12=33.82*np.pi/180
 theta_13=8.61*np.pi/180
 theta_23=48.3*np.pi/180
+
 E=10.0e6
 
 s12=np.sin(theta_12)
@@ -31,13 +33,7 @@ phi32=(m3**2-m2**2)/(4*E)
 phi31=(m3**2-m1**2)/(4*E)
 phi21=(m2**2-m1**2)/(4*E)
 
-print(phi32)
-print(phi31)
-print(phi21)
-
-print(np.sin(2*theta_13)**2*c12**2)
-print(np.sin(2*theta_13)**2*s12**2)
-print(c13**4*np.sin(2*theta_12)**2)
+#analityc data
 
 Pee=[]
 ti=[]
@@ -46,11 +42,14 @@ for t in np.linspace(0,(1/5.024999999999977e-08)*2*np.pi*0.6,10000):
     ti.append(t)
     Pee.append(1-np.sin(2*theta_13)**2*c12**2*np.sin(phi31*t)**2-np.sin(2*theta_13)**2*s12**2*(np.sin(phi32*t))**2-(c13**4)*np.sin(2*theta_12)**2*(np.sin(phi21*t))**2)
 
+#making plots
+
 fig,ax=plt.subplots()
 plt.plot(ti,Pee,label=r'Analitic solution')
 plt.plot(time,rho_electron,label=r'Numerical solution')
-plt.ylabel("Probability")
-plt.xlabel("time")
+plt.ylabel(r"$\rho_{ee}$")
+plt.xlabel(r"Time (natural units)")
 plt.xlim([-0.1e7, 3e7])
 plt.legend()
+plt.savefig("vaccum_neutrino_flavor_oscilattion_plot.pdf")
 plt.show()

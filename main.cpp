@@ -20,10 +20,10 @@ int main(){
     //energia eV
     double E=10.0e6; 
 
-    //time size step
+    //time size step natural units
     double dt=7502.310814542824;
 
-    //number of step to be compute
+    //number of step to be computed
     int number_of_steps=10000;
     
     //define an object of Density_matrix class
